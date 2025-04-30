@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "trello": {
+      "command": "{{PATH_TO_UV}}",
+      "args": [
+        "--directory",
+        "{{PATH_TO_SRC}}",
+        "run",
+        "server.py"
+      ],
+      "env": {
+        "TRELLO_API_KEY": "your_trello_api_key",
+        "TRELLO_API_TOKEN": "your_trello_token",
+        "NOTION_API_KEY": "your_notion_api_key",
+        "NOTION_PARENT_PAGE_ID": "your_notion_page_id"
+      }
+    }
+  }
+} 
