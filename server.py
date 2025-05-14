@@ -169,45 +169,6 @@ async def get_board_members(board_id: str) -> str:
     members = await fetch_from_api(f"/boards/{board_id}/members")
     return format_members(members)
 
-@mcp.tool()
-async def publish_to_notion(title: str, content: str) -> str:
-    """Publish content to a Notion page
-    
-    Args:
-        title: The title of the Notion page
-        content: The content to publish
-    """
-    data = {
-        "parent": { "type": "page_id", "page_id": os.getenv("NOTION_PARENT_PAGE_ID") },
-        "properties": {
-            "title": {
-                "title": [{ "text": { "content": title } }]
-            }
-        },
-        "children": [
-            {
-                "object": "block",
-                "type": "paragraph",
-                "paragraph": {
-                    "rich_text": [{ "text": { "content": content } }]
-                }
-            }
-        ]
-    }
-    
-    async with httpx.AsyncClient() as client:
-        response = await client.post(
-            "https://api.notion.com/v1/pages",
-            json=data,
-            headers={
-                "Authorization": f"Bearer {os.getenv('NOTION_API_KEY')}",
-                "Notion-Version": "2022-06-28",
-                "Content-Type": "application/json"
-            }
-        )
-        response.raise_for_status()
-        return "Content successfully published to Notion"
-
 # Helper formatting functions
 
 def format_boards(boards: list) -> str:
@@ -288,4 +249,4 @@ def format_members(members: list) -> str:
 
 if __name__ == "__main__":
     print("Starting Trello MCP server...")
-    mcp.run() 
+    mcp.run(transport = "stdio") 

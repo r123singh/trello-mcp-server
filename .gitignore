@@ -22,6 +22,7 @@ wheels/
 MANIFEST
 
 # Virtual Environment
+dotenv/
 .env
 .venv
 env/
@@ -29,7 +30,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-dotenv/
+
+# Environment files
+.env
+.env.*
+!.env.example
 
 # IDE
 .idea/
@@ -39,7 +44,6 @@ dotenv/
 .DS_Store
 
 # Project specific
-.env
 *.log
 .uv/
 .ruff_cache/
@@ -48,3 +52,6 @@ dotenv/
 
 # Local MCP configuration
 mcp.local.json 
+
+#other files
+article.md
